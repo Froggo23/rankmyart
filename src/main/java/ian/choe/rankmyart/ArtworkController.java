@@ -25,7 +25,7 @@ public class ArtworkController {
                         @RequestParam(name = "page", defaultValue = "1") int page,
                         @RequestParam(name = "query", required = false) String query,
                         HttpServletRequest request) {
-
+        // 아직 로그인은 안만듬
         // cookies
         // Cookie loginCookie = WebUtils.getCookie(request, "login_id");
         // if (loginCookie == null) {
@@ -41,7 +41,7 @@ public class ArtworkController {
 
         // Search function
         if (query != null && !query.isEmpty()) {
-            sql = "SELECT * FROM artworks WHERE title ILIKE ? OR description ILIKE ? ORDER BY id DESC LIMIT ? OFFSET ?";
+            sql = "SELECT * FROM public.artworks WHERE title ILIKE ? OR description ILIKE ? ORDER BY id DESC LIMIT ? OFFSET ?";
             List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, "%" + query + "%", "%" + query + "%", count, start);
 
             for (Map<String, Object> row : rows) {

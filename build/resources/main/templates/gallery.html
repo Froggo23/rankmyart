@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RankMyArt - Board</title>
+    <link rel="stylesheet" th:href="style.css">
+</head>
+<body>
+<header>
+    <h1>RankMyArt - Drawing Board</h1>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Upload</a></li>
+            <li><a href="#">Leaderboard</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="search-bar">
+        <form th:action="@{/board}" method="get">
+            <input type="text" name="query" th:value="${query}" placeholder="Search drawings...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div id="artwork-grid" class="grid-container">
+        <div class="artwork-card" th:each="artwork : ${artworkList}">
+            <img th:src="${artwork.imageUrl}" th:alt="${artwork.title}">
+            <h3 th:text="${artwork.title}"></h3>
+            <p>Category: <span th:text="${artwork.category}"></span></p>
+            <p th:text="${artwork.description}"></p>
+            <p>Upvotes: <span th:text="${artwork.upvotes}"></span></p>
+            <p>Views: <span th:text="${artwork.views}"></span></p>
+        </div>
+        <div th:if="${artworkList.isEmpty()}">
+            <p>No drawings found.</p>
+        </div>
+    </div>
+    <div class="pagination">
+            <span th:each="i : ${#numbers.sequence(1, totalPages)}">
+                <a th:href="@{/board(page=${i}, query=${query})}"
+                   th:text="${i}"
+                   th:class="${i == currentPage ? 'active' : ''}"></a>
+            </span>
+    </div>
+</main>
+<footer>
+    <p>© 2025 RankMyArt</p>
+</footer>
+</body>
+</html>

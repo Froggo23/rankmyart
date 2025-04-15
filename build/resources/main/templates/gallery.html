@@ -1,52 +1,132 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RankMyArt - Board</title>
-    <link rel="stylesheet" th:href="style.css">
+    <title>RankMyArt</title>
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
+
 <body>
 <header>
-    <h1>RankMyArt - Drawing Board</h1>
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Upload</a></li>
-            <li><a href="#">Leaderboard</a></li>
-        </ul>
+    <img class="logo" src="RankMyArtLogo.png" alt="RankMyArt Logo" onclick="window.location.href='index.html'">
+    <nav class="nav_links">
+        <li><a href="leaderboard.html"> Leaderboard </a></li>
+        <li><a href="upload.html"> Upload </a></li>
+        <li><a href="#"> Board </a></li>
     </nav>
+    <a class="cta" href="signup.html"> <button> Sign Up </button> </a>
 </header>
-<main>
-    <div class="search-bar">
-        <form th:action="@{/board}" method="get">
-            <input type="text" name="query" th:value="${query}" placeholder="Search drawings...">
-            <button type="submit">Search</button>
-        </form>
-    </div>
-    <div id="artwork-grid" class="grid-container">
-        <div class="artwork-card" th:each="artwork : ${artworkList}">
-            <img th:src="${artwork.imageUrl}" th:alt="${artwork.title}">
-            <h3 th:text="${artwork.title}"></h3>
-            <p>Category: <span th:text="${artwork.category}"></span></p>
-            <p th:text="${artwork.description}"></p>
-            <p>Upvotes: <span th:text="${artwork.upvotes}"></span></p>
-            <p>Views: <span th:text="${artwork.views}"></span></p>
+
+<div class="pin_container">
+    <div class="card">
+        <img src="100girlfriends.jpg" alt="Art 1">
+
+        <div class="overlay">
+            <div class="vote-controls">
+                <div class="vote-icon upvote">
+                    <img src="/votes/upvote.svg" class="icon-outline" alt="Upvote">
+                    <img src="/votes/upvote-fill.svg" class="icon-fill" alt="Upvote Filled">
+                </div>
+                <span class="vote-count">123</span>
+                <div class="vote-icon downvote">
+                    <img src="/votes/downvote.svg" class="icon-outline" alt="Downvote">
+                    <img src="/votes/downvote-fill.svg" class="icon-fill" alt="Downvote Filled">
+                </div>
+            </div>
         </div>
-        <div th:if="${artworkList.isEmpty()}">
-            <p>No drawings found.</p>
+    </div>
+
+    <div class="card">
+        <img src="/img/1girlfriends.jpg" alt="Art 1">
+
+        <div class="overlay">
+            <div class="vote-controls">
+                <div class="vote-icon upvote">
+                    <img src="/votes/upvote.svg" class="icon-outline" alt="Upvote">
+                    <img src="/votes/upvote-fill.svg" class="icon-fill" alt="Upvote Filled">
+                </div>
+                <span class="vote-count">123</span>
+                <div class="vote-icon downvote">
+                    <img src="/votes/downvote.svg" class="icon-outline" alt="Downvote">
+                    <img src="/votes/downvote-fill.svg" class="icon-fill" alt="Downvote Filled">
+                </div>
+            </div>
         </div>
     </div>
-    <div class="pagination">
-            <span th:each="i : ${#numbers.sequence(1, totalPages)}">
-                <a th:href="@{/board(page=${i}, query=${query})}"
-                   th:text="${i}"
-                   th:class="${i == currentPage ? 'active' : ''}"></a>
-            </span>
+
+    <div class="card">
+        <img src="/img/0.1girlfriends.jpg" alt="Art 1">
+
+        <div class="overlay">
+            <div class="vote-controls">
+                <div class="vote-icon upvote">
+                    <img src="/votes/upvote.svg" class="icon-outline" alt="Upvote">
+                    <img src="/votes/upvote-fill.svg" class="icon-fill" alt="Upvote Filled">
+                </div>
+                <span class="vote-count">123</span>
+                <div class="vote-icon downvote">
+                    <img src="/votes/downvote.svg" class="icon-outline" alt="Downvote">
+                    <img src="/votes/downvote-fill.svg" class="icon-fill" alt="Downvote Filled">
+                </div>
+            </div>
+        </div>
     </div>
-</main>
-<footer>
-    <p>© 2025 RankMyArt</p>
-</footer>
+
+    <div class="card">
+        <img src="/img/50girlfriends.jpg" alt="Art 1">
+
+        <div class="overlay">
+            <div class="vote-controls">
+                <div class="vote-icon upvote">
+                    <img src="/votes/upvote.svg" class="icon-outline" alt="Upvote">
+                    <img src="/votes/upvote-fill.svg" class="icon-fill" alt="Upvote Filled">
+                </div>
+                <span class="vote-count">123</span>
+                <div class="vote-icon downvote">
+                    <img src="/votes/downvote.svg" class="icon-outline" alt="Downvote">
+                    <img src="/votes/downvote-fill.svg" class="icon-fill" alt="Downvote Filled">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="/img/25girlfriends.jpg" alt="Art 1">
+    </div>
+
+    <div class="card">
+        <img src="/img/10girlfriends.jpg" alt="Art 1">
+    </div>
+
+    <div class="card">
+        <img src="/img/5girlfriends.jpg" alt="Art 1">
+    </div>
+
+    <div class="card">
+        <img src="/img/Meme.jpg" alt="Art 1">
+    </div>
+
+    <div class="card">
+        <img src="/img/10girlfriends.jpg" alt="Art 1">
+    </div>
+
+    <div class="card">
+        <img src="/img/5girlfriends.jpg" alt="Art 1">
+    </div>
+
+    <div class="card">
+        <img src="/img/Meme.jpg" alt="Art 1">
+    </div>
+
+    <div class="card">
+        <img src="/img/10girlfriends.jpg" alt="Art 1">
+    </div>
+
+</div>
+
+<script src="../static/js/voteControls.js" defer></script>
 </body>
+
 </html>

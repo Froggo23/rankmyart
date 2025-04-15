@@ -14,7 +14,7 @@
     <div class="dropzone" id="dropzone">
       <p>Drag & drop your image here or click to browse</p>
       <input type="file" id="fileInput" accept="image/*" name="imageFile" hidden />
-      <img id="preview" style="display: none;" />
+      <img id="preview" style="display: none;"  alt=""/>
     </div>
     <button id="toForm" class="next-btn">Next →</button>
   </div>
@@ -23,15 +23,21 @@
     <h2>Artwork Details</h2>
     <form class="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
       <div class="input-box">
-        <input type="text" name="title" placeholder="Title" required />
+        <label>
+          <input type="text" name="title" placeholder="Title" required />
+        </label>
         <i class='bx bxs-pencil'></i>
       </div>
       <div class="input-box">
-        <textarea name="description" placeholder="Description" required></textarea>
+        <label>
+          <textarea name="description" placeholder="Description" required></textarea>
+        </label>
         <i class='bx bxs-comment-detail'></i>
       </div>
       <div class="input-box">
-        <input type="text" name="tags" placeholder="Tags (comma separated)" required />
+        <label>
+          <input type="text" name="tags" placeholder="Tags (comma separated)" required />
+        </label>
         <i class='bx bxs-purchase-tag'></i>
       </div>
       <button type="submit" class="submit-btn" disabled>Submit</button>

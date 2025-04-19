@@ -1,10 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
+<head>
+  <meta charset="utf-16">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> SignUp </title>
+  <link rel="stylesheet" href="signupstyle.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+  <div id="preloader">
+    <div class="loader"></div>
+  </div>
+  
+  <header>
+    <img class="logo" src="RankMyArtLogo.png" alt="RankMyArt Logo" onclick="window.location.href='index.html'">
+    <nav class="nav_links">
+      <li><a href="index.html"> Leaderboard </a></li>
+      <li><a href="upload.html"> Upload </a></li>
+      <li><a href="#"> Forum </a></li>
+    </nav>
+    <a class="cta" href="signup.html"> <button> Sign Up </button> </a>
+  </header>
+  
+  <div class="container">
+    <div class="form-box login">
+      <form action="">
+        <h1> Login </h1>
+        <div class="input-box">
+          <input type="text" placeholder="Username" required>
+          <i class='bx bxs-user' ></i>
+        </div>
+        <div class="input-box">
+          <input type="password" placeholder="Password" required>
+          <i class='bx bxs-lock-alt' ></i>
+        </div>
+        <div class="forgot-link">
+          <a href="#">Forgot Password?</a>
+        </div>
+        <button type="submit" class="btn"> Login </button>
+      </form>  
+    </div>
+    
+    <div class="form-box register">
+      <form action="">
+        <h1> Registration </h1>
+        <div class="input-box">
+          <input type="text" placeholder="Username" required>
+          <i class='bx bxs-user' ></i>
+        </div>
+        <div class="input-box">
+          <input type="email" placeholder="Email" required>
+          <i class='bx bxs-envelope' ></i>
+        </div>
+        <div class="input-box">
+          <input type="password" placeholder="Password" required>
+          <i class='bx bxs-lock-alt' ></i>
+        </div>
+        <button type="submit" class="btn"> Register </button>
+      </form>
+    </div>
+
+    <div class="toggle-box">
+      <div class="toggle-panel toggle-left">
+        <h1> Hello, Welcome! </h1>
+        <p> Don't have an account? </p>
+        <button class="btn register-btn"> Register </button>
+      </div>
+      
+      <div class="toggle-panel toggle-right">
+        <h1> Welcome back! </h1>
+        <p> Already have an account? </p>
+        <button class="btn login-btn"> Login </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="signup.js"></script>
+
+  <script>
+    window.addEventListener("load", () => {
+      const preloader = document.getElementById("preloader");
+      preloader.style.opacity = "0";
+      setTimeout(() => {
+        preloader.style.display = "none";
+      }, 600); // matches the CSS transition
+    });
+  </script>
 </body>
+
 </html>

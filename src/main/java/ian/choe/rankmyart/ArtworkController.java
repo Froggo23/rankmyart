@@ -86,6 +86,6 @@ public class ArtworkController {
         model.addAttribute("currentPage", page);
         model.addAttribute("query", query);
 
-        return "gallery";
+        return "index";
     }
 }

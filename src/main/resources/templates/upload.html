@@ -8,62 +8,62 @@
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-  <div id="preloader">
-    <div class="loader"></div>
+<div id="preloader">
+  <div class="loader"></div>
+</div>
+
+<header>
+  <img class="logo" src="/img/RankMyArtLogo.png" alt="RankMyArt Logo" onclick="window.location.href='/gallery'">
+  <nav class="nav_links">
+    <li><a href="#"> Leaderboard </a></li>
+    <li><a href="/upload"> Upload </a></li>
+    <li><a href="#"> Forum </a></li>
+  </nav>
+  <a class="cta" href="/signup"> <button> Sign Up </button> </a>
+</header>
+
+<div class="upload-wrapper">
+  <div class="step step-upload active">
+    <h2>Select Your Artwork</h2>
+    <div class="dropzone" id="dropzone">
+      <p>Drag & drop your image here or click to browse</p>
+      <img id="preview" style="display: none;" />
+    </div>
+    <button id="toForm" class="next-btn">Next →</button>
   </div>
-  
-  <header>
-    <img class="logo" src="/img/RankMyArtLogo.png" alt="RankMyArt Logo" onclick="window.location.href='/gallery'">
-    <nav class="nav_links">
-      <li><a href="#"> Leaderboard </a></li>
-      <li><a href="/upload"> Upload </a></li>
-      <li><a href="#"> Forum </a></li>
-    </nav>
-    <a class="cta" href="/signup"> <button> Sign Up </button> </a>
-  </header>
-  
-  <div class="upload-wrapper">
-    <div class="step step-upload active">
-      <h2>Select Your Artwork</h2>
-      <div class="dropzone" id="dropzone">
-        <p>Drag & drop your image here or click to browse</p>
-        <input type="file" id="fileInput" accept="image/*" name="imageFile" hidden />
-        <img id="preview" style="display: none;" />
+
+  <div class="step step-form">
+    <h2>Artwork Details</h2>
+    <form class="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
+      <input type="file" id="fileInput" accept="image/*" name="imageFile" hidden />
+      <div class="input-box">
+        <input type="text" name="title" placeholder="Title" required />
+        <i class='bx bxs-pencil'></i>
       </div>
-      <button id="toForm" class="next-btn">Next →</button>
-    </div>
-
-    <div class="step step-form">
-      <h2>Artwork Details</h2>
-      <form class="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
-        <div class="input-box">
-          <input type="text" name="title" placeholder="Title" required />
-          <i class='bx bxs-pencil'></i>
-        </div>
-        <div class="input-box">
-          <textarea name="description" placeholder="Description" required></textarea>
-          <i class='bx bxs-comment-detail'></i>
-        </div>
-        <div class="input-box">
-          <input type="text" name="tags" placeholder="Tags (comma separated)" required />
-          <i class='bx bxs-purchase-tag'></i>
-        </div>
-        <button type="submit" class="submit-btn" disabled>Submit</button>
-      </form>
-      <button id="backToUpload" class="back-btn">← Back</button>
-    </div>
+      <div class="input-box">
+        <textarea name="description" placeholder="Description" required></textarea>
+        <i class='bx bxs-comment-detail'></i>
+      </div>
+      <div class="input-box">
+        <input type="text" name="tags" placeholder="Tags (comma separated)" required />
+        <i class='bx bxs-purchase-tag'></i>
+      </div>
+      <button type="submit" class="submit-btn" disabled>Submit</button>
+    </form>
+    <button id="backToUpload" class="back-btn">← Back</button>
   </div>
+</div>
 
-  <script src="/js/upload.js" defer></script>
+<script src="/js/upload.js" defer></script>
 
-  <script>
-    window.addEventListener("load", () => {
-      const preloader = document.getElementById("preloader");
-      preloader.style.opacity = "0";
-      setTimeout(() => {
-        preloader.style.display = "none";
-      }, 600); // matches the CSS transition
-    });
-  </script>
+<script>
+  window.addEventListener("load", () => {
+    const preloader = document.getElementById("preloader");
+    preloader.style.opacity = "0";
+    setTimeout(() => {
+      preloader.style.display = "none";
+    }, 600); // matches the CSS transition
+  });
+</script>
 </body>
 </html>

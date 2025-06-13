@@ -1,5 +1,6 @@
-package ian.choe.rankmyart;
+package ian.choe.rankmyart.controller;
 
+import ian.choe.rankmyart.model.Artwork;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;

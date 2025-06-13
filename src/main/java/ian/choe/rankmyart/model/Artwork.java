@@ -1,4 +1,4 @@
-package ian.choe.rankmyart;
+package ian.choe.rankmyart.model;
 
 public class Artwork {
     private Integer id;

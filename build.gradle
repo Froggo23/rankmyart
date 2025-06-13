@@ -23,6 +23,10 @@ dependencies {
     implementation 'org.postgresql:postgresql:42.7.3'
     // Optional: DevTools
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.730' // 최신 버전 확인 권장
+    implementation platform('com.amazonaws:aws-java-sdk-bom:1.12.730')
+    implementation 'com.amazonaws:aws-java-sdk-s3'
 }
 
 tasks.named('test') {

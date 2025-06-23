@@ -24,7 +24,7 @@
 <div class="top-three"></div>
 
 <div class="pin_container">
-  <div class="card" th:each="artwork : ${artworkList}">
+  <div class="card" th:each="artwork : ${artworkList}" th:data-artwork-id="${artwork.id}">
     <img th:src="${artwork.imageUrl}" th:alt="${artwork.title}"> <div class="overlay">
     <div class="vote-controls">
       <div class="vote-icon upvote">

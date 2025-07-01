@@ -14,11 +14,18 @@
 <header>
   <img class="logo" src="/img/RankMyArtLogo.png" alt="RankMyArt Logo" onclick="window.location.href='/gallery'">
   <nav class="nav_links">
-    <li><a href="#"> Leaderboard </a></li>
+    <li><a href="/artinfo"> Leaderboard </a></li>
     <li><a href="/upload"> Upload </a></li>
     <li><a href="#"> Forum </a></li>
   </nav>
-  <a class="cta" href="/signup"> <button> Sign Up </button> </a>
+  <div class="user-actions">
+    <a class="cta" href="/signup"> <button> Sign Up </button> </a>
+    <a href="/profile" class="profile-circle">
+      <!-- Place an <img> here for profile pictures -->
+      <!-- THIS IS JUST a placeholder!!!!! -->
+      <img src="https://i.pravatar.cc/45" alt="Profile Picture">
+    </a>
+  </div>
 </header>
 
 <div class="top-three"></div>
@@ -36,11 +43,13 @@
       <img src="/votes/downvote-fill.svg" class="icon-fill" alt="Downvote Filled">
     </div>
     </div>
-    <div class="artwork-details">
+    <!--
+     <div class="artwork-details">
       <h3 th:text="${artwork.title}">Artwork Title</h3>
       <p th:text="${artwork.description}">Artwork Description</p>
       <p>Views: <span th:text="${artwork.views}">0</span></p>
     </div>
+    -->
   </div>
   </div>
 </div>

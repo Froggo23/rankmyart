@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile | RankMyArt</title>
+  <!-- Linking to a new stylesheet for the profile page -->
+  <link rel="stylesheet" href="/css/profilestyle.css">
+</head>
+
+<body>
+
+<!-- Reusing the same header for consistency -->
+<header>
+  <img class="logo" src="/img/RankMyArtLogo.png" alt="RankMyArt Logo" onclick="window.location.href='/gallery'">
+  <nav class="nav_links">
+    <li><a href="#"> Leaderboard </a></li>
+    <li><a href="/upload"> Upload </a></li>
+    <li><a href="#"> Forum </a></li>
+  </nav>
+  <div class="user-actions">
+    <a href="/profile" class="profile-circle">
+      <img src="https://i.pravatar.cc/45" alt="Profile Picture">
+    </a>
+  </div>
+</header>
+
+<!-- Main container for the profile content -->
+<div class="profile-container">
+
+
+  <div class="profile-header">
+    <div class="profile-avatar">
+      <img src="https://i.pravatar.cc/150" alt="User Avatar">
+    </div>
+    <h1 class="username">ArtisticUser123</h1>
+    <p class="user-bio">Just a digital artist sharing my journey. Love creating fantasy landscapes and character portraits. Let me know what you think!</p>
+    <div class="profile-stats">
+      <div class="stat">
+        <strong>15K</strong>
+        <span>Followers</span>
+      </div>
+      <div class="stat">
+        <strong>890</strong>
+        <span>Following</span>
+      </div>
+      <div class="stat">
+        <strong>4.8M</strong>
+        <span>Total Views</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="artwork-toggle">
+    <button class="toggle-btn active" id="show-uploads">My Uploads</button>
+    <button class="toggle-btn" id="show-saved">Saved Artworks</button>
+  </div>
+
+  <div class="pin_container">
+    <!-- Placeholder cards, to be replaced by Thymeleaf loop -->
+    <div class="card">
+      <img src="https://placehold.co/250x350/1a1a1a/ffffff?text=Artwork+1" alt="Artwork">
+    </div>
+    <div class="card">
+      <img src="https://placehold.co/250x250/1a1a1a/ffffff?text=Artwork+2" alt="Artwork">
+    </div>
+    <div class="card">
+      <img src="https://placehold.co/250x400/1a1a1a/ffffff?text=Artwork+3" alt="Artwork">
+    </div>
+    <div class="card">
+      <img src="https://placehold.co/250x300/1a1a1a/ffffff?text=Artwork+4" alt="Artwork">
+    </div>
+    <div class="card">
+      <img src="https://placehold.co/250x320/1a1a1a/ffffff?text=Artwork+5" alt="Artwork">
+    </div>
+  </div>
+
+  <div class="logout-section">
+    <button class="logout-btn">Edit Profile</button>
+    <button class="logout-btn">Log Out</button>
+  </div>
+
+</div>
+
+</body>
+
+</html>

@@ -56,4 +56,14 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password.");
         }
     }
+
+    @GetMapping("/profile")
+    public String showProfilePage() {
+        return "profile";
+    }
+
+    @GetMapping("/artinfo")
+    public String showArtInfoPage() {
+        return "artinfo";
+    }
 }

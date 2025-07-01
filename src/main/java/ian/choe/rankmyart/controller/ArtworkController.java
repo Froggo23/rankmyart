@@ -19,6 +19,11 @@ public class ArtworkController {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @GetMapping("/")
+    public String redirectToGallery() {
+        return "redirect:/gallery";
+    }
+
     @GetMapping("/gallery")
     public String board(Model model,
                         @RequestParam(name = "page", defaultValue = "1") int page,
@@ -90,3 +95,4 @@ public class ArtworkController {
         return "index";
     }
 }
+

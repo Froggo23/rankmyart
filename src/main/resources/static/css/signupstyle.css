@@ -54,7 +54,7 @@ header {
   justify-content: flex-end;
   align-items: center;
   padding: 20px 10%;
-  background-color: #000000;
+  background-color: #121212;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -104,7 +104,7 @@ body{
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: black;
+  background: #121212;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(20px);
 }

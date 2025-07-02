@@ -42,6 +42,10 @@ loginForm.addEventListener('submit', async (e) => {
     const result = await response.text(); // Read response text
 
     if (response.ok) {
+
+
+      document.cookie = `username=${loginForm.username.value}; expires=${new Date(Date.now() + 300 * 60 * 1000).toUTCString()}; path=/`;
+      alert('Login succeeded!');
       // Login successful
       loginMessage.style.color = 'green';
       loginMessage.textContent = result + " Redirecting...";

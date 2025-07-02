@@ -27,17 +27,11 @@ public class ArtworkController {
     @GetMapping("/gallery")
     public String board(Model model,
                         @RequestParam(name = "page", defaultValue = "1") int page,
-                        @RequestParam(name = "query", required = false) String query,
-                        HttpServletRequest request) {
-        // 아직 로그인은 안만듬
-        // cookies
-        // Cookie loginCookie = WebUtils.getCookie(request, "login_id");
-        // if (loginCookie == null) {
-        //     return "redirect:/login";
-        // }
+                        @RequestParam(name = "query", required = false) String query) {
+
 
         // Pagination
-        int count = 10;
+        int count = 5;
         int start = (page - 1) * count;
         List<Artwork> artworkList = new ArrayList<>();
         String sql;

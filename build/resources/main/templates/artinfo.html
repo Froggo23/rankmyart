@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artwork Details | RankMyArt</title>
+  <!-- New stylesheet for this page -->
+  <link rel="stylesheet" href="/css/artinfostyle.css">
+</head>
+
+<body>
+<!-- Reusing the same header for consistency -->
+<header>
+  <img class="logo" src="/img/RankMyArtLogo.png" alt="RankMyArt Logo" onclick="window.location.href='/gallery'">
+  <nav class="nav_links">
+    <li><a href="#"> Leaderboard </a></li>
+    <li><a href="/upload"> Upload </a></li>
+    <li><a href="#"> Forum </a></li>
+  </nav>
+  <div class="user-actions">
+    <a href="/profile" class="profile-circle">
+      <img src="https://i.pravatar.cc/45" alt="Profile Picture">
+    </a>
+  </div>
+</header>
+
+<!-- Main container for the entire page content -->
+<main class="page-container">
+
+  <!-- 5. Back Button -->
+  <div class="back-button-container">
+    <a href="javascript:history.back()" class="back-btn">&larr; Back to Gallery</a>
+  </div>
+
+  <!-- 1-3. Main Artwork Info Container -->
+  <div class="art-info-container">
+
+    <!-- Image Column -->
+    <div class="image-container">
+      <img src="https://placehold.co/800x1200/1a1a1a/ffffff?text=Artwork" alt="Artwork Title">
+    </div>
+
+    <!-- Details Column -->
+    <div class="details-container">
+      <!-- Uploader Info -->
+      <div class="uploader-info">
+        <img src="https://i.pravatar.cc/40" alt="Uploader Avatar" class="uploader-avatar">
+        <span class="uploader-name">ArtisticUser123</span>
+      </div>
+
+      <!-- Title & Description -->
+      <h1 class="artwork-title">Enchanted Forest</h1>
+      <p class="artwork-description">
+        A digital painting depicting a mystical forest bathed in moonlight. This piece was inspired by classic folklore and the enchanting power of nature. Created using Procreate on iPad Pro.
+      </p>
+
+      <!-- Stats and Actions -->
+      <div class="stats-actions">
+        <div class="stat-item">
+          <img src="/img/upvote-icon.svg" alt="Upvotes">
+          <span>1,284</span>
+        </div>
+        <div class="stat-item">
+          <img src="/img/eye-icon.svg" alt="Views">
+          <span>25.7k</span>
+        </div>
+        <div class="action-buttons">
+          <button class="action-btn bookmark-btn">
+            <img src="/img/bookmark-icon.svg" alt="Bookmark">
+            <span>Save</span>
+          </button>
+          <button class="action-btn">Share</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Comment Section -->
+  <div class="comment-section">
+    <h2>Comments (34)</h2>
+    <div class="comment-form">
+      <img src="https://i.pravatar.cc/40?u=a042581f4e29026704d" alt="Your Avatar" class="comment-avatar">
+      <textarea placeholder="Add a comment..."></textarea>
+      <button>Post</button>
+    </div>
+    <div class="comment-list">
+      <!-- Example Comment -->
+      <div class="comment">
+        <img src="https://i.pravatar.cc/40?u=a042581f4e29026704c" alt="Commenter Avatar" class="comment-avatar">
+        <div class="comment-content">
+          <span class="commenter-name">JaneDoe</span>
+          <p class="comment-text">Absolutely stunning work! The lighting is magical.</p>
+        </div>
+      </div>
+      <!-- Example Comment -->
+      <div class="comment">
+        <img src="https://i.pravatar.cc/40?u=a042581f4e29026704e" alt="Commenter Avatar" class="comment-avatar">
+        <div class="comment-content">
+          <span class="commenter-name">ArtFan_01</span>
+          <p class="comment-text">This is my new phone wallpaper. Incredible talent!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

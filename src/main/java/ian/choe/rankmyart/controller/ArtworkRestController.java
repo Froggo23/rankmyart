@@ -123,7 +123,7 @@ public class ArtworkRestController {
 
     @PostMapping("/deleteComment")
     public String deleteComment(@RequestBody Comment comment, HttpServletRequest request) {
-        Cookie loginCookie = WebUtils.getCookie(request, "login_id");
+        Cookie loginCookie = WebUtils.getCookie(request, "username");
         if (loginCookie == null) {
             return "failed"; // Not logged in
         }
@@ -139,5 +139,6 @@ public class ArtworkRestController {
 
         return rowsAffected > 0 ? "success" : "failed";
     }
+
 
 }

@@ -1,7 +1,10 @@
 package ian.choe.rankmyart.controller;
 
 import ian.choe.rankmyart.model.Artwork;
+import ian.choe.rankmyart.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -87,6 +91,41 @@ public class ArtworkController {
         model.addAttribute("query", query);
 
         return "index";
+    }
+
+    @GetMapping("/artinfo")
+    public String showArtInfoPage(@RequestParam("id") int artworkId, Model model) {
+        // Fetch the artwork details
+        try {
+            String artworkSql = "SELECT * FROM artworks WHERE id = ?";
+            Artwork artwork = jdbcTemplate.queryForObject(artworkSql, new BeanPropertyRowMapper<>(Artwork.class), artworkId);
+            model.addAttribute("artwork", artwork);
+        } catch (EmptyResultDataAccessException e) {
+            return "redirect:/gallery"; // artwork not found
+        }
+
+        // fetch comment
+        String commentsSql = "SELECT * FROM comments WHERE artwork_id = ? ORDER BY created_at DESC";
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(commentsSql, artworkId);
+        List<Comment> comments = new ArrayList<>();
+
+        for (Map<String, Object> row : rows) {
+            Comment comment = new Comment();
+            comment.setId((Integer) row.get("id"));
+            comment.setPostId((Integer) row.get("artwork_id"));
+            comment.setContent((String) row.get("content"));
+            comment.setAuthor((String) row.get("author"));
+            comment.setCommentDate((Date) row.get("created_at"));
+
+            Object isEdited = row.get("is_edited");
+            comment.setEdited(isEdited != null && (boolean) isEdited);
+
+            comments.add(comment);
+        }
+
+        model.addAttribute("comments", comments);
+
+        return "artinfo";
     }
 }
 

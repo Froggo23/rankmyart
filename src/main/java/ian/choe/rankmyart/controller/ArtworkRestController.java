@@ -1,14 +1,15 @@
 package ian.choe.rankmyart.controller;
 
 import ian.choe.rankmyart.model.Artwork;
+import ian.choe.rankmyart.model.Comment;
 import ian.choe.rankmyart.model.User;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.WebUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,18 +57,15 @@ public class ArtworkRestController {
 
     @GetMapping("/user")
     public User getUser(@RequestParam(name = "username") String username) {
-        // SQL to find a user by their username in the 'users' table
+        // SQL to find user by username
         String sql = "SELECT * FROM users WHERE username = ?";
 
         try {
-            // queryForMap expects a single result. It's perfect for finding a unique user.
+
             Map<String, Object> row = jdbcTemplate.queryForMap(sql, username);
 
             User user = new User();
 
-            // Map the database columns to your User object fields.
-            // Note: These field names ('id', 'email', 'bio', etc.) are assumed.
-            // Make sure they match the actual columns in your 'users' table and fields in your User model.
             user.setId((Integer) row.get("id"));
             user.setUsername((String) row.get("username"));
             user.setEmail((String) row.get("email"));
@@ -76,8 +74,7 @@ public class ArtworkRestController {
             return user;
 
         } catch (EmptyResultDataAccessException e) {
-            // This block runs if no user with that username is found.
-            // Returning null will result in an empty or 404 response, which is appropriate.
+            // return null if user not found
             return null;
         }
     }
@@ -86,7 +83,7 @@ public class ArtworkRestController {
     public Artwork getArtworkById(@PathVariable int id) {
         String sql = "SELECT * FROM artworks WHERE id = ?";
         try {
-            // Use queryForMap as we expect exactly one result for a given ID.
+
             Map<String, Object> row = jdbcTemplate.queryForMap(sql, id);
 
             Artwork artwork = new Artwork();
@@ -101,9 +98,46 @@ public class ArtworkRestController {
             return artwork;
 
         } catch (EmptyResultDataAccessException e) {
-            // If queryForMap finds no rows, it throws this exception.
-            // We return null to indicate the artwork was not found.
+            // return null if artwork not found
             return null;
         }
     }
+
+    @PostMapping("/submitComment")
+    public String createComment(@RequestBody Comment comment, HttpServletRequest request) {
+        Cookie loginCookie = WebUtils.getCookie(request, "login_id");
+        if (loginCookie == null) {
+            return "needs login";
+        }
+
+        String author = loginCookie.getValue();
+        String content = comment.getContent();
+        Integer postId = comment.getPostId();
+
+        String sql = "INSERT INTO comments (author, content, artwork_id, created_at) VALUES (?, ?, ?, NOW())";
+
+        jdbcTemplate.update(sql, author, content, postId);
+
+        return "success";
+    }
+
+    @PostMapping("/deleteComment")
+    public String deleteComment(@RequestBody Comment comment, HttpServletRequest request) {
+        Cookie loginCookie = WebUtils.getCookie(request, "login_id");
+        if (loginCookie == null) {
+            return "failed"; // Not logged in
+        }
+
+        String loggedInUser = loginCookie.getValue();
+        if (!loggedInUser.equals(comment.getAuthor())) { // if the account logged in isn't the owner of comments? ㅇㅇ 꺼져~
+            return "failed";
+        }
+
+        String sql = "DELETE FROM comments WHERE id = ?";
+
+        int rowsAffected = jdbcTemplate.update(sql, comment.getId());
+
+        return rowsAffected > 0 ? "success" : "failed";
+    }
+
 }

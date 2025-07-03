@@ -7,11 +7,11 @@ import java.util.Date;
 @Data
 public class Comment {
     int id;
-    int postId;
+    int artworkId;
 
     String content;
     String author;
-    Date commentDate;
+    Date createdAt;
 
     boolean isEdited;
 }

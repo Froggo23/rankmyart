@@ -112,10 +112,10 @@ public class ArtworkController {
         for (Map<String, Object> row : rows) {
             Comment comment = new Comment();
             comment.setId((Integer) row.get("id"));
-            comment.setPostId((Integer) row.get("artwork_id"));
+            comment.setArtworkId((Integer) row.get("artwork_id"));
             comment.setContent((String) row.get("content"));
             comment.setAuthor((String) row.get("author"));
-            comment.setCommentDate((Date) row.get("created_at"));
+            comment.setCreatedAt((Date) row.get("created_at"));
 
             Object isEdited = row.get("is_edited");
             comment.setEdited(isEdited != null && (boolean) isEdited);

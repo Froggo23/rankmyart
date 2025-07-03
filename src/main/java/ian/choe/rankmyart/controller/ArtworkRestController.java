@@ -112,11 +112,11 @@ public class ArtworkRestController {
 
         String author = loginCookie.getValue();
         String content = comment.getContent();
-        Integer postId = comment.getPostId();
+        Integer artworkId = comment.getArtworkId();
 
         String sql = "INSERT INTO comments (author, content, artwork_id, created_at) VALUES (?, ?, ?, NOW())";
 
-        jdbcTemplate.update(sql, author, content, postId);
+        jdbcTemplate.update(sql, author, content, artworkId);
 
         return "success";
     }

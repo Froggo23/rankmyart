@@ -61,9 +61,4 @@ public class UserController {
     public String showProfilePage() {
         return "profile";
     }
-
-    @GetMapping("/artinfo")
-    public String showArtInfoPage() {
-        return "artinfo";
-    }
 }

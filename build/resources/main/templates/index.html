@@ -3,6 +3,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery | RankMyArt</title>
+  <link rel="stylesheet" href="/css/header.css">
+
   <link rel="stylesheet" href="/css/indexstyle.css">
 </head>
 
@@ -11,22 +13,7 @@
   <div class="loader"></div>
 </div>
 
-<header>
-  <img class="logo" src="/img/RankMyArtLogo.png" alt="RankMyArt Logo" onclick="window.location.href='/gallery'">
-  <nav class="nav_links">
-    <li><a href="/artinfo"> Leaderboard </a></li>
-    <li><a href="/upload"> Upload </a></li>
-    <li><a href="#"> Forum </a></li>
-  </nav>
-  <div class="user-actions">
-    <a class="cta" href="/signup"> <button> Sign Up </button> </a>
-    <a href="/profile" class="profile-circle">
-      <!-- Place an <img> here for profile pictures -->
-      <!-- THIS IS JUST a placeholder!!!!! -->
-      <img src="https://i.pravatar.cc/45" alt="Profile Picture">
-    </a>
-  </div>
-</header>
+<div th:replace="~{fragments/header :: header}"></div>
 
 <div class="top-three"></div>
 
@@ -63,6 +50,7 @@
 </div>
 
 <script src="/js/index.js" defer></script>
+<script src="/js/auth.js" defer></script>
 
 <script>
   window.addEventListener("load", () => {

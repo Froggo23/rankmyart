@@ -5,26 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Profile | RankMyArt</title>
-  <!-- Linking to a new stylesheet for the profile page -->
+  <link rel="stylesheet" href="/css/header.css">
+
   <link rel="stylesheet" href="/css/profilestyle.css">
 </head>
 
 <body>
+<div id="preloader">
+  <div class="loader"></div>
+</div>
 
 <!-- Reusing the same header for consistency -->
-<header>
-  <img class="logo" src="/img/RankMyArtLogo.png" alt="RankMyArt Logo" onclick="window.location.href='/gallery'">
-  <nav class="nav_links">
-    <li><a href="#"> Leaderboard </a></li>
-    <li><a href="/upload"> Upload </a></li>
-    <li><a href="#"> Forum </a></li>
-  </nav>
-  <div class="user-actions">
-    <a href="/profile" class="profile-circle">
-      <img src="https://i.pravatar.cc/45" alt="Profile Picture">
-    </a>
-  </div>
-</header>
+<div th:replace="~{fragments/header :: header}"></div>
 
 <!-- Main container for the profile content -->
 <div class="profile-container">
@@ -78,11 +70,22 @@
 
   <div class="logout-section">
     <button class="logout-btn">Edit Profile</button>
-    <button class="logout-btn">Log Out</button>
+    <button class="logout-btn" id="logout-btn">Log Out</button>
   </div>
 
 </div>
 
-</body>
+<script src="/js/auth.js" defer></script>
+<script src="/js/profile.js" defer></script>
 
+<script>
+  window.addEventListener("load", () => {
+    const preloader = document.getElementById("preloader");
+    preloader.style.opacity = "0";
+    setTimeout(() => {
+      preloader.style.display = "none";
+    }, 600); // matches the CSS transition
+  });
+</script>
+</body>
 </html>

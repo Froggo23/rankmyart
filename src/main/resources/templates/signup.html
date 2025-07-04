@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Signup | RankMyArt</title>
+  <link rel="stylesheet" href="/css/header.css">
+
   <link rel="stylesheet" href="/css/signupstyle.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -14,15 +16,7 @@
   <div class="loader"></div>
 </div>
 
-<header>
-  <img class="logo" src="/img/RankMyArtLogo.png" alt="RankMyArt Logo" onclick="window.location.href='/gallery'">
-  <nav class="nav_links">
-    <li><a href="#"> Leaderboard </a></li>
-    <li><a href="/upload"> Upload </a></li>
-    <li><a href="#"> Forum </a></li>
-  </nav>
-  <a class="cta" href="/signup"> <button> Sign Up </button> </a>
-</header>
+<div th:replace="~{fragments/header :: header}"></div>
 
 <div class="container">
   <div class="form-box login">
@@ -78,6 +72,7 @@
 </div>
 
 <script src="/js/signup.js"></script>
+<script src="/js/auth.js" defer></script>
 
 <script>
   window.addEventListener("load", () => {

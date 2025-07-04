@@ -6,12 +6,10 @@ import java.util.Date;
 
 @Data
 public class Comment {
-    int id;
-    int postId;
-
-    String content;
-    String author;
-    Date commentDate;
-
-    boolean isEdited;
+    private int id;
+    private int artworkId;
+    private String content;
+    private String author;
+    private Date createdAt;
+    private boolean isEdited;
 }

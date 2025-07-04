@@ -1,6 +1,8 @@
 const dropzone = document.getElementById('dropzone');
 const fileInput = document.getElementById('fileInput');
 const preview = document.getElementById('preview');
+// ADD THIS: Get the new cancel button
+const cancelBtn = document.getElementById('cancel-upload-btn');
 
 const stepUpload = document.querySelector('.step-upload');
 const stepForm = document.querySelector('.step-form');
@@ -13,6 +15,20 @@ const titleField = form.querySelector('input[name="title"]');
 const descField = form.querySelector('textarea[name="description"]');
 const tagsField = form.querySelector('input[name="tags"]');
 
+// ADD THIS: A function to reset the image state
+function resetFileState() {
+  preview.src = '';
+  preview.style.display = 'none';
+  fileInput.value = ''; // This is crucial to clear the selected file
+  dropzone.classList.remove('has-file'); // For the CSS to hide the button
+}
+
+// Event listener for the new cancel button
+cancelBtn.addEventListener('click', (e) => {
+  e.stopPropagation(); // Prevents the dropzone click from firing
+  resetFileState();
+});
+
 // Drag and drop behavior
 dropzone.addEventListener('click', () => fileInput.click());
 
@@ -23,6 +39,7 @@ fileInput.addEventListener('change', () => {
     reader.onload = e => {
       preview.src = e.target.result;
       preview.style.display = 'block';
+      dropzone.classList.add('has-file'); // For the CSS to show the 'X'
     };
     reader.readAsDataURL(file);
   }
@@ -47,6 +64,7 @@ dropzone.addEventListener('drop', (e) => {
     reader.onload = e => {
       preview.src = e.target.result;
       preview.style.display = 'block';
+      dropzone.classList.add('has-file'); // For the CSS to show the 'X'
     };
     reader.readAsDataURL(file);
   }

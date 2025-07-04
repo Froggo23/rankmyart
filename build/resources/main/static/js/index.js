@@ -72,7 +72,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+/**
+     * Attaches click listeners to all artwork cards to navigate to the art info page.
+     */
+    function attachCardClickListeners() {
+        document.querySelectorAll('.card').forEach(card => {
+            // Check if a listener is already attached to avoid duplicates
+            if (card.dataset.clickListenerAttached) return;
+            card.dataset.clickListenerAttached = 'true';
+
+            card.addEventListener('click', (e) => {
+                // We want to navigate only when the card itself is clicked,
+                // not the vote buttons inside it.
+                if (e.target.closest('.vote-controls')) {
+                    return;
+                }
+
+                const artworkId = card.dataset.artworkId;
+                if (artworkId) {
+                    window.location.href = `/artinfo?id=${artworkId}`;
+                }
+            });
+        });
+    }
+
     // Call attachVoteListeners when the DOM is fully loaded.
     // This ensures listeners are applied to all cards rendered by Thymeleaf.
     attachVoteListeners();
+
+    // Call the new function along with the old one
+    attachCardClickListeners();
 });

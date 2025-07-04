@@ -353,6 +353,24 @@ button:hover {
   background-color: #CF0F47;
 }
 
+/* --- Authentication UI Controls --- */
+
+/* By default, hide both buttons to prevent flickering on load */
+.user-actions .cta,
+.user-actions .profile-circle {
+    display: none;
+}
+
+/* When the user is logged out, show the 'Sign Up' button */
+body.logged-out .user-actions .cta {
+    display: block;
+}
+
+/* When the user is logged in, show the profile circle */
+body.logged-in .user-actions .profile-circle {
+    display: flex; /* Use flex to keep alignment correct */
+}
+
 /* Artwork details
 
 .artwork-details {
@@ -386,3 +404,4 @@ button:hover {
 }
 
 */
+

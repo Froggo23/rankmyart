@@ -28,8 +28,9 @@ dependencies {
     implementation platform('com.amazonaws:aws-java-sdk-bom:1.12.730')
     implementation 'com.amazonaws:aws-java-sdk-s3'
 
-    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
 }
 
 tasks.named('test') {

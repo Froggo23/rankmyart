@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.WebUtils;
 
+// Import the Map class
+import java.util.Map;
+
 @RestController
 public class CommentController {
 
@@ -21,34 +24,41 @@ public class CommentController {
     }
 
     @PostMapping("/submitComment")
-    public String createComment(@RequestBody Comment comment, HttpServletRequest request) {
-        Cookie loginCookie = WebUtils.getCookie(request, "login_id");
+    public String createComment(@RequestBody Map<String, String> payload, HttpServletRequest request) {
+        Cookie loginCookie = WebUtils.getCookie(request, "username"); // Using "username" cookie for consistency
         if (loginCookie == null) {
             return "needs login";
         }
 
-        String author = loginCookie.getValue();
-        comment.setAuthor(author);
+        // Manually extract data from the payload Map
+        String content = payload.get("content");
+        int artworkId = Integer.parseInt(payload.get("artworkId"));
 
-        commentService.createComment(comment);
+        Comment newComment = new Comment();
+        newComment.setArtworkId(artworkId);
+        newComment.setContent(content);
+        newComment.setAuthor(loginCookie.getValue());
 
-        return "success";
+        boolean success = commentService.createComment(newComment);
+        return success ? "success" : "failed";
     }
 
     @PostMapping("/deleteComment")
-    public String deleteComment(@RequestBody Comment comment, HttpServletRequest request) {
+    public String deleteComment(@RequestBody Map<String, String> payload, HttpServletRequest request) {
         Cookie loginCookie = WebUtils.getCookie(request, "username");
         if (loginCookie == null) {
-            return "failed"; // Not logged in
-        }
-
-        String loggedInUser = loginCookie.getValue();
-        if (!loggedInUser.equals(comment.getAuthor())) {
             return "failed";
         }
 
-        boolean deleted = commentService.deleteComment(comment.getId());
+        int commentId = Integer.parseInt(payload.get("id"));
+        String commentAuthor = payload.get("author");
+        String loggedInUser = loginCookie.getValue();
 
+        if (!loggedInUser.equals(commentAuthor)) {
+            return "failed";
+        }
+
+        boolean deleted = commentService.deleteComment(commentId);
         return deleted ? "success" : "failed";
     }
 }

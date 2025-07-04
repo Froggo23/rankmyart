@@ -41,32 +41,45 @@ async function loadPageData(artworkId) {
     }
 }
 
-// This function now lives in artinfo.js to render the comment list
+// This function now conditionally renders the delete button
 function renderComments(comments) {
+    document.getElementById('comment-header-title').textContent = `Comments (${comments ? comments.length : 0})`;
+
+    // Get the currently logged-in user from auth.js
+    const loggedInUser = getLoggedInUser();
     const commentListContainer = document.getElementById('comment-list-container');
-    commentListContainer.innerHTML = ''; // Clear existing comments
+    commentListContainer.innerHTML = '';
 
     if (!comments || comments.length === 0) {
         commentListContainer.innerHTML = '<p class="no-comments">Be the first to comment!</p>';
     } else {
         comments.forEach(comment => {
+            let deleteButtonHTML = ''; // Start with an empty delete button
+
+            // Only create the delete button if a user is logged in AND they are the comment's author
+            if (loggedInUser && loggedInUser === comment.author) {
+                deleteButtonHTML = `
+                    <button class="delete-comment-btn"
+                            comment-id="${comment.id}"
+                            author="${comment.author}"
+                            onclick="deleteComment(this)">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.109a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.9h1.368c1.603 0 2.816 1.336 2.816 2.9zM12 3.25a.75.75 0 01.75.75v.008l.008.008H12v-.008L12 4zM9.75 4.5v.008H14.25v-.008a.75.75 0 01-.75-.75h-3a.75.75 0 01-.75.75z" clip-rule="evenodd" />
+                            <path d="M5.25 6.375a.75.75 0 01.75-.75h12a.75.75 0 01.75.75v.042l-.22 2.861a3 3 0 01-2.99 2.712H8.71a3 3 0 01-2.99-2.712l-.22-2.861v-.042z" />
+                        </svg>
+                    </button>`;
+            }
+
             const commentElement = document.createElement('div');
             commentElement.className = 'comment';
             commentElement.innerHTML = `
                 <img src="https://i.pravatar.cc/40" alt="Avatar" class="comment-avatar">
                 <div class="comment-content">
-                <div class="comment-header">
-                <span class="commenter-name">${comment.author}</span>
-
-                <button class="delete-comment-btn"
-                comment-id="${comment.id}"
-                author="${comment.author}"
-                onclick="deleteComment(this)">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' class='w-6 h-6'%3E%3Cpath fill-rule='evenodd' d='M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.109a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.9h1.368c1.603 0 2.816 1.336 2.816 2.9zM12 3.25a.75.75 0 01.75.75v.008l.008.008H12v-.008L12 4zM9.75 4.5v.008H14.25v-.008a.75.75 0 01-.75-.75h-3a.75.75 0 01-.75.75z' clip-rule='evenodd' /%3E%3Cpath d='M5.25 6.375a.75.75 0 01.75-.75h12a.75.75 0 01.75.75v.042l-.22 2.861a3 3 0 01-2.99 2.712H8.71a3 3 0 01-2.99-2.712l-.22-2.861v-.042z' /%3E%3C/svg%3E" alt="Delete">
-                </button>
-
-                </div>
-                <p class="comment-text">${comment.content}</p>
+                    <div class="comment-header">
+                        <span class="commenter-name">${comment.author}</span>
+                        ${deleteButtonHTML}
+                    </div>
+                    <p class="comment-text">${comment.content}</p>
                 </div>
             `;
             commentListContainer.appendChild(commentElement);

@@ -21,8 +21,12 @@ public class CommentService {
         return commentRepository.findCommentsByArtworkId(artworkId);
     }
 
-    public void createComment(Comment comment) {
-        commentRepository.save(comment);
+    public boolean createComment(Comment comment) {
+        return commentRepository.save(comment);
+    }
+
+    public Comment getCommentById(int commentId) {
+        return commentRepository.findById(commentId);
     }
 
     public boolean deleteComment(int commentId) {

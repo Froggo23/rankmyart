@@ -1,7 +1,10 @@
 package ian.choe.rankmyart.domain.artwork.service;
 
 import ian.choe.rankmyart.domain.artwork.repository.ArtworkRepository;
+import ian.choe.rankmyart.domain.comment.service.CommentService;
 import ian.choe.rankmyart.model.Artwork;
+import ian.choe.rankmyart.model.ArtworkDetailsDto;
+import ian.choe.rankmyart.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +14,12 @@ import java.util.List;
 public class ArtworkService {
 
     private final ArtworkRepository artworkRepository;
+    private final CommentService commentService;
 
     @Autowired
-    public ArtworkService(ArtworkRepository artworkRepository) {
+    public ArtworkService(ArtworkRepository artworkRepository, CommentService commentService) {
         this.artworkRepository = artworkRepository;
+        this.commentService = commentService;
     }
 
     public List<Artwork> getArtworks(int page, String query) {
@@ -44,5 +49,14 @@ public class ArtworkService {
 
     public void saveArtwork(String title, String tags, String description, String imageUrl) {
         artworkRepository.save(title, tags, description, imageUrl);
+    }
+
+    public ArtworkDetailsDto getArtworkDetails(int artworkId) {
+        Artwork artwork = artworkRepository.findArtworkById(artworkId);
+        if (artwork == null) {
+            return null;
+        }
+        List<Comment> comments = commentService.getCommentsByArtworkId(artworkId);
+        return new ArtworkDetailsDto(artwork, comments);
     }
 }

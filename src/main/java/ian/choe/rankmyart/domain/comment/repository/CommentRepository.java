@@ -23,9 +23,19 @@ public class CommentRepository {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Comment.class), artworkId);
     }
 
-    public void save(Comment comment) {
+    public Comment findById(int commentId) {
+        String sql = "SELECT * FROM comments WHERE id = ?";
+        try {
+            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Comment.class), commentId);
+        } catch (Exception e) {
+            return null; // Return null if not found
+        }
+    }
+
+    public boolean save(Comment comment) {
         String sql = "INSERT INTO comments (author, content, artwork_id, created_at) VALUES (?, ?, ?, NOW())";
-        jdbcTemplate.update(sql, comment.getAuthor(), comment.getContent(), comment.getArtworkId());
+        int rowsAffected = jdbcTemplate.update(sql, comment.getAuthor(), comment.getContent(), comment.getArtworkId());
+        return rowsAffected > 0;
     }
 
     public boolean deleteById(int commentId) {

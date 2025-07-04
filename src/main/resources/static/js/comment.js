@@ -26,22 +26,21 @@ async function submitComment() {
 // Deletes a comment and reloads the page data
 async function deleteComment(buttonElement) {
     const commentId = buttonElement.getAttribute('comment-id');
-    const author = buttonElement.getAttribute('author');
+    const author = buttonElement.getAttribute('author'); // You already have the author here
     const urlParams = new URLSearchParams(window.location.search);
     const artworkId = urlParams.get('id');
 
-    if (confirm('Are you sure you want to delete this comment?')) {
-        const response = await fetch('/delete-comment', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: commentId, author })
-        });
+    const response = await fetch('/deleteComment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        // Add the author back into the JSON body below
+        body: JSON.stringify({ id: commentId, author: author })
+    });
 
-        const resultText = await response.text();
-        if (resultText === 'success') {
-            await loadPageData(artworkId); // Reload all data
-        } else {
-            alert('You are not authorized to delete this comment.');
-        }
+    const resultText = await response.text();
+    if (resultText === 'success') {
+        await loadPageData(artworkId);
+    } else {
+        alert('You are not authorized to delete this comment.');
     }
 }

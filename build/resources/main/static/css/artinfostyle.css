@@ -217,13 +217,12 @@ header {
 .delete-comment-btn:hover {
     opacity: 1;
     background-color: rgba(255, 11, 85, 0.2);
-    color: #FF0B55; /* <-- ADD THIS to set the icon color on hover */
+    color: #FF0B55;
 }
 
-.delete-comment-btn img {
+.delete-comment-btn svg {
     width: 16px;
     height: 16px;
-    /* The fill property here can be removed */
 }
 
 .comment-section {
@@ -276,6 +275,7 @@ header {
     border-radius: 50%;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    align-self: center;
 }
 
 .submit-comment-btn:hover {
@@ -309,7 +309,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 6px; /* Added space below header */
+    margin-bottom: 2px; /* Changed to 2px */
 }
 
 .commenter-name {

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile | RankMyArt</title>
+    <link rel="stylesheet" href="/css/editprofilestyle.css">
+    <link rel="stylesheet" href="/css/header.css">
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main class="edit-profile-container">
+    <div class="form-wrapper">
+        <div class="form-header">
+            <h1>Edit Your Profile</h1>
+        </div>
+
+        <form id="editProfileForm" action="/update-profile" method="post" enctype="multipart/form-data">
+            <div class="avatar-upload-section">
+                <div class="avatar-preview">
+                    <img id="avatarPreview" src="https://i.pravatar.cc/150" alt="User Avatar">
+                    <label for="avatarInput" class="change-avatar-label">Change</label>
+                </div>
+                <input type="file" id="avatarInput" name="avatarFile" accept="image/png, image/jpeg" hidden>
+            </div>
+
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" value="ArtisticUser123" disabled>
+            </div>
+
+            <div class="input-group">
+                <label for="bio">Your Bio</label>
+                <textarea id="bio" name="bio" placeholder="Tell us a little about yourself..."></textarea>
+            </div>
+
+            <div class="form-actions">
+                <a href="/profile" class="cancel-btn">Cancel</a>
+                <button type="submit" class="save-btn">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<script src="/js/editprofile.js" defer></script>
+</body>
+</html>

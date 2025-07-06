@@ -47,16 +47,6 @@ public class ArtworkController {
 
     @GetMapping("/artinfo")
     public String showArtInfoPage(@RequestParam("id") int artworkId, Model model) {
-        Artwork artwork = artworkService.getArtworkById(artworkId);
-        if (artwork == null) {
-            return "redirect:/gallery"; // artwork not found
-        }
-
-        List<Comment> comments = commentService.getCommentsByArtworkId(artworkId);
-
-        model.addAttribute("artwork", artwork);
-        model.addAttribute("comments", comments);
-
         return "artinfo";
     }
 }

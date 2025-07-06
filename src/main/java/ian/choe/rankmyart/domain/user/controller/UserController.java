@@ -63,4 +63,9 @@ public class UserController {
     public String showProfilePage() {
         return "profile";
     }
+
+    @GetMapping("/editprofile")
+    public String showEditProfilePage() {
+        return "editprofile";
+    }
 }

@@ -5,15 +5,19 @@ public class User {
     private String username;
     private String email;
     private String password; // Stores the plain text password
+    private String profileImg; // New field for profile image URL
+    private String bio;        // New field for user bio
 
     // Constructors
     public User() {}
 
-    public User(int id, String username, String email, String password) {
+    public User(int id, String username, String email, String password, String profileImg, String bio) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.profileImg = profileImg; // Initialize new field
+        this.bio = bio;              // Initialize new field
     }
 
     // Getters and Setters
@@ -47,5 +51,22 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    // New getters and setters for profileImg and bio
+    public String getProfileImg() {
+        return profileImg;
+    }
+
+    public void setProfileImg(String profileImg) {
+        this.profileImg = profileImg;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 }

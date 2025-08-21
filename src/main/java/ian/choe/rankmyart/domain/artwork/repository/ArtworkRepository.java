@@ -40,7 +40,10 @@ public class ArtworkRepository {
     }
 
     public Artwork findArtworkById(int artworkId) {
-        String sql = "SELECT * FROM artworks WHERE id = ?";
+        String sql = "SELECT a.*, u.username AS uploaderUsername, u.profile_img AS uploaderProfileImg " +
+                "FROM artworks a " +
+                "LEFT JOIN users u ON a.uploader_username = u.username " +
+                "WHERE a.id = ?";
         try {
             return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Artwork.class), artworkId);
         } catch (EmptyResultDataAccessException e) {
@@ -58,8 +61,13 @@ public class ArtworkRepository {
         jdbcTemplate.update(sql, upvotes, id);
     }
 
-    public void save(String title, String tags, String description, String imageUrl) {
-        String sql = "INSERT INTO artworks (title, category, description, image_url) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, title, tags, description, imageUrl);
+    public void save(String title, String tags, String description, String imageUrl, String username) {
+        String sql = "INSERT INTO artworks (title, category, description, image_url, uploader_username) VALUES (?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, title, tags, description, imageUrl, username);
+    }
+
+    public List<Artwork> findArtworksByUploaderUsername(String username) {
+        String sql = "SELECT * FROM artworks WHERE uploader_username = ? ORDER BY id DESC";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Artwork.class), username);
     }
 }

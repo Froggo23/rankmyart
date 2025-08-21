@@ -63,8 +63,8 @@ public class UserRepository {
      * @param profileImg The new profile image URL.
      * @param bio The new bio text.
      */
-    public void updateUserProfile(String username, String profileImg, String bio) {
-        String sql = "UPDATE users SET profile_img = ?, bio = ? WHERE username = ?";
-        jdbcTemplate.update(sql, profileImg, bio, username);
+    public void updateUserProfile(String originalUsername, String newUsername, String profileImg, String bio) {
+        String sql = "UPDATE users SET username = ?, profile_img = ?, bio = ? WHERE username = ?";
+        jdbcTemplate.update(sql, newUsername, profileImg, bio, originalUsername);
     }
 }

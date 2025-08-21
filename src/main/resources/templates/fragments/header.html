@@ -1,16 +1,31 @@
-<header th:fragment="header">
-    <img class="logo" src="/img/RankMyArtLogo.png" alt="RankMyArt Logo" onclick="window.location.href='/gallery'">
-    <nav class="nav_links">
-        <li><a href="#"> Leaderboard </a></li>
-        <li><a href="/upload"> Upload </a></li>
-        <li><a href="#"> Forum </a></li>
-    </nav>
-    <div class="user-actions">
-        <a class="cta" href="/signup">
-            <button> Log In </button>
+<header th:fragment="header" class="new-header">
+    <div class="header-left">
+        <a href="/gallery">
+            <img class="header-logo-img" src="/img/RankMyArtLogo.png" alt="RankMyArt Logo">
         </a>
-        <a href="/profile" class="profile-circle">
-            <img src="https://i.pravatar.cc/45" alt="Profile Picture">
-        </a>
+        <nav class="header-nav">
+            <a href="/gallery">Home</a>
+            <a href="#">Leaderboard</a>
+            <a href="/upload">Upload</a>
+        </nav>
+    </div>
+
+    <div class="header-right">
+        <form action="/gallery" method="get" class="search-bar">
+            <div class="search-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path></svg>
+            </div>
+            <input placeholder="Search" class="search-input" name="query" th:value="${query}" />
+        </form>
+
+        <div class="user-actions">
+            <div class="cta">
+                <a href="/signup" class="btn btn-login">Log in</a>
+                <a href="/signup" class="btn btn-signup">Sign up</a>
+            </div>
+            <a href="/profile" class="profile-circle">
+                <img src="/img/default-avatar.svg" id="header-profile-img">
+            </a>
+        </div>
     </div>
 </header>

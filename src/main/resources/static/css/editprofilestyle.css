@@ -145,12 +145,6 @@ header {
     box-shadow: 0 0 0 3px rgba(255, 11, 85, 0.2);
 }
 
-.input-group input[disabled] {
-    background-color: #242424;
-    color: #888;
-    cursor: not-allowed;
-}
-
 .input-group textarea {
     resize: none;
     min-height: 100px;

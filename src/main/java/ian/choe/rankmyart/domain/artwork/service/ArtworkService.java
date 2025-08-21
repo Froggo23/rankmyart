@@ -47,8 +47,8 @@ public class ArtworkService {
         return artworkRepository.findArtworkById(artworkId);
     }
 
-    public void saveArtwork(String title, String tags, String description, String imageUrl) {
-        artworkRepository.save(title, tags, description, imageUrl);
+    public void saveArtwork(String title, String tags, String description, String imageUrl, String username) {
+        artworkRepository.save(title, tags, description, imageUrl, username);
     }
 
     public ArtworkDetailsDto getArtworkDetails(int artworkId) {
@@ -58,5 +58,9 @@ public class ArtworkService {
         }
         List<Comment> comments = commentService.getCommentsByArtworkId(artworkId);
         return new ArtworkDetailsDto(artwork, comments);
+    }
+
+    public List<Artwork> getArtworksByUploader(String username) {
+        return artworkRepository.findArtworksByUploaderUsername(username);
     }
 }

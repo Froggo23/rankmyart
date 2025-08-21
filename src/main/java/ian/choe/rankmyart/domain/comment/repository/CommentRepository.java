@@ -19,7 +19,11 @@ public class CommentRepository {
     }
 
     public List<Comment> findCommentsByArtworkId(int artworkId) {
-        String sql = "SELECT * FROM comments WHERE artwork_id = ? ORDER BY created_at DESC";
+        String sql = "SELECT c.*, u.profile_img AS authorProfileImg " +
+                "FROM comments c " +
+                "LEFT JOIN users u ON c.author = u.username " +
+                "WHERE c.artwork_id = ? " +
+                "ORDER BY c.created_at DESC";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Comment.class), artworkId);
     }
 

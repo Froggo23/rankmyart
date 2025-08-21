@@ -211,7 +211,7 @@ header {
     line-height: 0;
     opacity: 0.5;
     transition: all 0.3s ease;
-    color: #888; /* <-- ADD THIS to set the default icon color */
+    color: white;
 }
 
 .delete-comment-btn:hover {

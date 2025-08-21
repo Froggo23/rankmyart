@@ -33,7 +33,7 @@ public class UserService {
             return false; // Email already exists
         }
         // Set default profile image and bio for new users
-        user.setProfileImg("https://i.pravatar.cc/150"); // Default avatar URL
+        user.setProfileImg("/img/default-avatar.svg"); // Default avatar URL
         user.setBio(""); // Empty bio
         userRepository.save(user);
         return true;
@@ -71,30 +71,24 @@ public class UserService {
      * @param bio The new bio text.
      * @return true if the profile is updated successfully, false otherwise.
      */
-    public boolean updateProfile(String username, MultipartFile profileImage, String bio) {
-        User user = userRepository.findByUsername(username);
+    public boolean updateProfile(String originalUsername, String newUsername, MultipartFile profileImage, String bio) {
+        User user = userRepository.findByUsername(originalUsername);
         if (user == null) {
-            System.err.println("User not found for username: " + username);
             return false; // User not found
         }
 
-        String newProfileImgUrl = user.getProfileImg(); // Start with current image URL
+        String newProfileImgUrl = user.getProfileImg();
         if (profileImage != null && !profileImage.isEmpty()) {
             try {
-                // Delete old profile image from S3 if it's not the default one
-                // and if a new image is actually being uploaded.
                 if (newProfileImgUrl != null) {
                     s3FileService.deleteFile(newProfileImgUrl);
                 }
                 newProfileImgUrl = s3FileService.uploadFile(profileImage);
             } catch (IOException e) {
-                System.err.println("Error uploading profile image for user " + username + ": " + e.getMessage());
-                return false; // Failed to upload image
+                return false;
             }
         }
-
-        // Update the user's profile in the database
-        userRepository.updateUserProfile(username, newProfileImgUrl, bio);
+        userRepository.updateUserProfile(originalUsername, newUsername, newProfileImgUrl, bio);
         return true;
     }
 }

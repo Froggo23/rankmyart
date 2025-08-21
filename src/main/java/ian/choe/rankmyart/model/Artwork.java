@@ -11,4 +11,6 @@ public class Artwork {
     private String imageUrl;
     private Integer upvotes;
     private Integer views;
+    private String uploaderUsername;
+    private String uploaderProfileImg;
 }

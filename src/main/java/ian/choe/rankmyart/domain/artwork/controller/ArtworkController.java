@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -32,7 +32,12 @@ public class ArtworkController {
     @GetMapping("/gallery")
     public String board(Model model,
                         @RequestParam(name = "page", defaultValue = "1") int page,
-                        @RequestParam(name = "query", required = false) String query) {
+                        @RequestParam(name = "query", required = false) String query,
+                        HttpServletResponse response) {
+
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+        response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+        response.setDateHeader("Expires", 0); // Proxies.
 
         List<Artwork> artworkList = artworkService.getArtworks(page, query);
         int totalPages = artworkService.getTotalPages(query);

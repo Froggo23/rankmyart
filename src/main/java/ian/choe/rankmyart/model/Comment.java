@@ -8,10 +8,9 @@ import java.util.Date;
 public class Comment {
     int id;
     int artworkId;
-
     String content;
     String author;
     Date createdAt;
-
     boolean isEdited;
+    private String authorProfileImg;
 }

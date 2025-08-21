@@ -28,4 +28,9 @@ public class ArtworkRestController {
     public Artwork getArtworkById(@PathVariable int id) {
         return artworkService.getArtworkById(id);
     }
+
+    @GetMapping("/api/user/{username}/artworks")
+    public List<Artwork> getUserArtworks(@PathVariable String username) {
+        return artworkService.getArtworksByUploader(username);
+    }
 }

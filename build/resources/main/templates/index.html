@@ -19,25 +19,22 @@
 
 <div class="pin_container">
   <div class="card" th:each="artwork : ${artworkList}" th:data-artwork-id="${artwork.id}">
-    <img th:src="${artwork.imageUrl}" th:alt="${artwork.title}"> <div class="overlay">
-    <div class="vote-controls">
-      <div class="vote-icon upvote">
-        <img src="/votes/upvote.svg" class="icon-outline" alt="Upvote">
-        <img src="/votes/upvote-fill.svg" class="icon-fill" alt="Upvote Filled">
+    <img th:src="${artwork.imageUrl}" th:alt="${artwork.title}">
+
+    <div class="overlay">
+      <div class="vote-controls">
+        <div class="vote-icon upvote">
+          <img src="/votes/upvote.svg" class="icon-outline" alt="Upvote">
+          <img src="/votes/upvote-fill.svg" class="icon-fill" alt="Upvote Filled">
+        </div>
+
+        <span class="vote-count" th:text="${artwork.upvotes}">126</span>
+        <div class="vote-icon downvote">
+          <img src="/votes/downvote.svg" class="icon-outline" alt="Downvote">
+          <img src="/votes/downvote-fill.svg" class="icon-fill" alt="Downvote Filled">
+        </div>
       </div>
-      <span class="vote-count" th:text="${artwork.upvotes}">126</span> <div class="vote-icon downvote">
-      <img src="/votes/downvote.svg" class="icon-outline" alt="Downvote">
-      <img src="/votes/downvote-fill.svg" class="icon-fill" alt="Downvote Filled">
     </div>
-    </div>
-    <!--
-     <div class="artwork-details">
-      <h3 th:text="${artwork.title}">Artwork Title</h3>
-      <p th:text="${artwork.description}">Artwork Description</p>
-      <p>Views: <span th:text="${artwork.views}">0</span></p>
-    </div>
-    -->
-  </div>
   </div>
 </div>
 

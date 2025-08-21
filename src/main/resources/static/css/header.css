@@ -1,107 +1,160 @@
-/* --- Global Header Styles --- */
-header {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 20px 10%;
-  background-color: #121212;
-  user-select: none;
-  -webkit-user-select: none;
+/* In: public/css/header.css */
+
+/* Main Header Container - Adapted for Dark Theme */
+.new-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+    border-bottom: 1px solid #333; /* Darker border */
+    padding: 20px 10%; /* Adjusted padding to match site layout */
+    background-color: #121212; /* Dark background */
+    color: #fff; /* White text */
 }
 
-header .logo {
-  height: auto;
-  max-height: 170px;
-  max-width: 170px;
-  margin-right: auto;
-  cursor: pointer;
-  user-drag: none;
-  -webkit-user-drag: none;
+/* Left Section */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
 }
 
-header .nav_links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* Reverted to original logo styling */
+.header-logo-img {
+    height: auto;
+    max-height: 70px; /* Adjusted for new header height */
+    cursor: pointer;
 }
 
-header .nav_links li {
-  display: inline-block;
-  padding: 0px 20px;
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 2.25rem;
 }
 
-header .nav_links li a {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  font-weight: bold;
-  font-size: 20px;
-  color: white;
-  text-decoration: none;
-  transition: all 0.3s ease 0s;
+.header-nav a {
+    color: #fff; /* White text */
+    font-size: 1rem; /* Adjusted for better visibility */
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+.header-nav a:hover {
+    color: #FF0B55; /* Using original brand color for hover */
 }
 
-header .nav_links li a:hover {
-  color: #FF0B55;
+/* Right Section */
+.header-right {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2rem;
 }
 
-header .user-actions {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-left: 25px;
+/* Search Bar - Dark Theme */
+.search-bar {
+    display: flex;
+    align-items: stretch;
+    height: 2.5rem;
+    min-width: 10rem;
+    max-width: 16rem;
+    background-color: #2c2c2c; /* Dark background */
+    border-radius: 0.75rem;
 }
 
-/* Signup Button */
-header .cta button {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  font-weight: bold;
-  font-size: 20px;
-  color: white;
-  text-decoration: none;
-  padding: 9px 25px;
-  background-color: #FF0B55;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.3s ease 0s;
+.search-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 1rem;
+    color: #aaa; /* Lighter icon color */
 }
 
-header .cta button:hover {
-  background-color: #CF0F47;
+.search-input {
+    width: 100%;
+    min-width: 0;
+    flex: 1;
+    border: none;
+    background-color: #2c2c2c; /* Dark background */
+    color: #fff; /* White text */
+    height: 100%;
+    padding: 0 1rem 0 0.5rem;
+    border-radius: 0 0.75rem 0.75rem 0;
+    font-size: 1rem;
+}
+.search-input:focus {
+    outline: none;
+}
+.search-input::placeholder {
+    color: #aaa; /* Lighter placeholder text */
+}
+
+/* User Actions - Dark Theme */
+.user-actions {
+    display: flex;
+    align-items: center;
+}
+.user-actions .cta {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn {
+    display: flex;
+    min-width: 84px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    height: 2.5rem;
+    padding: 0 1rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity 0.2s ease-in-out;
+}
+.btn:hover {
+    opacity: 0.85;
+}
+
+/* Button Colors - Dark Theme */
+.btn-login {
+    background-color: #FF0B55; /* Original brand red */
+    color: #fcf8f8;
+}
+.btn-signup {
+    background-color: #333; /* Dark gray background */
+    color: #fff; /* White text */
 }
 
 /* Profile Circle */
-header .profile-circle {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  background-color: #2c2c2c;
-  border: 2px solid #444;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  overflow: hidden;
+.profile-circle {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    overflow: hidden;
+    border: 2px solid #444; /* Darker border */
+    transition: border-color 0.2s ease-in-out;
+}
+.profile-circle:hover {
+    border-color: #FF0B55;
+}
+.profile-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-header .profile-circle img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-header .profile-circle:hover {
-  border-color: #FF0B55;
-}
-
-/* --- Conditional Display Logic --- */
-/* By default, hide both to prevent flickering */
+/* Conditional Display Logic (Unchanged) */
 .user-actions .cta,
 .user-actions .profile-circle {
     display: none;
 }
-/* When logged out, show the 'Sign Up' button */
 body.logged-out .user-actions .cta {
-    display: block;
-}
-/* When logged in, show the profile circle */
-body.logged-in .user-actions .profile-circle {
     display: flex;
+}
+body.logged-in .user-actions .profile-circle {
+    display: block;
 }

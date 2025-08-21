@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class UserController {
@@ -84,20 +85,28 @@ public class UserController {
      */
     @PostMapping("/update-profile")
     public ResponseEntity<String> updateProfile(
+            @RequestParam("username") String newUsername, // Add this parameter
             @RequestParam(value = "avatarFile", required = false) MultipartFile avatarFile,
             @RequestParam("bio") String bio,
-            HttpServletRequest request) {
+            HttpServletRequest request,
+            HttpServletResponse response) { // Add HttpServletResponse
 
         Cookie loginCookie = WebUtils.getCookie(request, "username");
         if (loginCookie == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not logged in.");
         }
-        String username = loginCookie.getValue();
+        String originalUsername = loginCookie.getValue();
 
-        boolean updated = userService.updateProfile(username, avatarFile, bio);
+        boolean updated = userService.updateProfile(originalUsername, newUsername, avatarFile, bio);
 
         if (updated) {
-            // Redirect to the profile page after successful update
+            // If username was changed, we must update the cookie
+            if (!originalUsername.equals(newUsername)) {
+                Cookie newCookie = new Cookie("username", newUsername);
+                newCookie.setPath("/");
+                newCookie.setMaxAge(300 * 60); // Match your login cookie's age
+                response.addCookie(newCookie);
+            }
             return ResponseEntity.status(HttpStatus.FOUND).header("Location", "/profile").build();
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update profile.");

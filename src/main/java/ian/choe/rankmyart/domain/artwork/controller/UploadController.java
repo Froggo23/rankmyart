@@ -42,7 +42,14 @@ public class UploadController {
             @RequestParam("imageFile") MultipartFile imageFile,
             @RequestParam("title") String title,
             @RequestParam("description") String description,
-            @RequestParam("tags") String tags) {
+            @RequestParam("tags") String tags,
+            HttpServletRequest request) { // Add HttpServletRequest here
+
+        Cookie loginCookie = WebUtils.getCookie(request, "username");
+        if (loginCookie == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You must be logged in to upload.");
+        }
+        String username = loginCookie.getValue();
 
         if (imageFile.isEmpty()) {
             return ResponseEntity.badRequest().body("Select image to upload");
@@ -50,7 +57,8 @@ public class UploadController {
 
         try {
             String imageUrl = s3FileService.uploadFile(imageFile);
-            artworkService.saveArtwork(title, tags, description, imageUrl);
+            // Pass the username to the service method
+            artworkService.saveArtwork(title, tags, description, imageUrl, username);
 
             System.out.println("Uploaded Image URL: " + imageUrl);
             System.out.println("Title: " + title);

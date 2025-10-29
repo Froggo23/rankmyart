@@ -59,7 +59,6 @@ public class UserRepository {
 
     /**
      * Updates the profile image URL and bio for a given user.
-     * @param username The username of the user to update.
      * @param profileImg The new profile image URL.
      * @param bio The new bio text.
      */
@@ -67,4 +66,14 @@ public class UserRepository {
         String sql = "UPDATE users SET username = ?, profile_img = ?, bio = ? WHERE username = ?";
         jdbcTemplate.update(sql, newUsername, profileImg, bio, originalUsername);
     }
+
+    public User findByGoogleId(String googleId) {
+        String sql = "SELECT id, username, email, password, profile_img, bio FROM users WHERE email = ?";
+        try {
+            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), googleId);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
 }

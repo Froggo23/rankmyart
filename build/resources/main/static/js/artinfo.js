@@ -69,7 +69,6 @@ function renderComments(comments) {
         comments.forEach(comment => {
             let deleteButtonHTML = '';
             if (loggedInUser && loggedInUser === comment.author) {
-                // (The delete button logic remains unchanged)
                 deleteButtonHTML = `
                     <button class="delete-comment-btn"
                             comment-id="${comment.id}"

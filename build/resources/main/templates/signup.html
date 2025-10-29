@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/css/header.css">
 
   <link rel="stylesheet" href="/css/signupstyle.css">
+  <link rel="stylesheet" href="/css/sso.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
@@ -33,8 +34,18 @@
       <div class="forgot-link">
         <a href="#">Forgot Password?</a>
       </div>
+      <div id="g_id_onload"
+           data-client_id="532604260359-bbbakp45pseiimq4iunk9um69krau1hp.apps.googleusercontent.com"
+           data-login_uri="/login/google"
+           data-auto_prompt="false">
+      </div>
+      <script src="https://accounts.google.com/gsi/client" async defer></script>
+      <div class="g_id_signin" data-type="standard"></div>
       <button type="submit" class="btn"> Login </button>
       <p id="loginMessage" style="color:red; margin-top: 10px;"></p> </form>
+
+
+
   </div>
 
   <div class="form-box register">
@@ -52,8 +63,17 @@
         <input type="password" placeholder="Password" name="password" required>
         <i class='bx bxs-lock-alt' ></i>
       </div>
+      <div id="g_id_onlogin"
+           data-client_id="532604260359-bbbakp45pseiimq4iunk9um69krau1hp.apps.googleusercontent.com"
+           data-login_uri="/login/google"
+           data-auto_prompt="false">
+      </div>
+
+      <script src="https://accounts.google.com/gsi/client" async defer></script>
+      <div class="g_id_signin" data-type="standard"></div>
       <button type="submit" class="btn"> Register </button>
       <p id="registerMessage" style="color:red; margin-top: 10px;"></p> </form>
+
   </div>
 
   <div class="toggle-box">

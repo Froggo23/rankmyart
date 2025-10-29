@@ -1,5 +1,8 @@
 package ian.choe.rankmyart.model;
 
+import lombok.Data;
+
+@Data
 public class User {
     private int id;
     private String username;
@@ -9,7 +12,8 @@ public class User {
     private String bio;        // New field for user bio
 
     // Constructors
-    public User() {}
+    public User() {
+    }
 
     public User(int id, String username, String email, String password, String profileImg, String bio) {
         this.id = id;
@@ -20,6 +24,18 @@ public class User {
         this.bio = bio;              // Initialize new field
     }
 
+<<<<<<< Updated upstream
+=======
+    public User(int id, String username, String email, String password, String profileImg, String bio, String googleId) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.profileImg = profileImg;
+        this.bio = bio;
+    }
+
+>>>>>>> Stashed changes
     // Getters and Setters
     public int getId() {
         return id;
@@ -69,4 +85,8 @@ public class User {
     public void setBio(String bio) {
         this.bio = bio;
     }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 }

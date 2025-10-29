@@ -91,4 +91,9 @@ public class UserService {
         userRepository.updateUserProfile(originalUsername, newUsername, newProfileImgUrl, bio);
         return true;
     }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
 }

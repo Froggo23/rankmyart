@@ -46,7 +46,7 @@ public class UploadController {
             HttpServletRequest request) { // Add HttpServletRequest here
 
         Cookie loginCookie = WebUtils.getCookie(request, "username");
-        if (loginCookie == null) {
+        if (loginCookie == null) { 
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You must be logged in to upload.");
         }
         String username = loginCookie.getValue();
